@@ -8,10 +8,10 @@ jobs:
     name: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: 3.11
 
@@ -32,25 +32,21 @@ jobs:
     strategy:
       matrix:
         python: ['3.8', '3.11']
-        django: ['3.2', '4.2']
-        wagtail: ['4.1', '5.2', '6.0']
+        django: ['4.2', '5.0']
+        wagtail: ['5.2', '6.0', '6.1']
         exclude:
-          - django: '3.2'
-            wagtail: '6.0'
-          - django: '4.2'
-            wagtail: '4.1'
-          - python: '3.11'
-            django: '3.2'
-        include:
-          - python: '3.11'
+          - python: '3.8'
             django: '5.0'
-            wagtail: '6.0'
+          - python: '3.9'
+            django: '5.0'
+          - python: '3.12'
+            django: '4.2'
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
 
@@ -78,12 +74,12 @@ jobs:
       - test
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
